@@ -1,11 +1,10 @@
 <app-header></app-header>
-
 <main>
   <div id="users">
-    <app-user></app-user>
+    <app-user (selectedUser)="onUserTasks($event)"></app-user>
   </div>
   <div id="fallback">
-    <app-tasks></app-tasks>
+    <app-tasks [tasks]="userTasks" [user]="selectedUser"></app-tasks>
   </div>
 </main>
 

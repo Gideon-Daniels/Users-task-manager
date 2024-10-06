@@ -1,1 +1,13 @@
-<app-task></app-task>
+<div id="tasks">
+  <header>
+    <h2>{{ user.name }}</h2>
+    <menu>
+      <button>Add Task</button>
+    </menu>
+  </header>
+  <ul>
+    @for (task of tasks; track task.id) {
+      <app-task [task]="task"></app-task>
+    }
+  </ul>
+</div>

@@ -1,8 +1,9 @@
 <div>
-  @for (user of users; track user) {
-    <button>
+  @for (user of users; track user.id) {
+    <button (click)="onSelectedUser(user)">
       <img [src]='"../../assets/users/" + user.avatar' alt="avatar">
       <span>{{ user.name }}</span>
     </button>
   }
 </div>
+

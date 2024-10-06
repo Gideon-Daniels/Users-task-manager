@@ -2,6 +2,7 @@ article {
   padding: 1rem;
   color: #25113d;
   background-color: #bf9ee5;
+  border-radius: 8px;
 }
 
 h2 {
@@ -10,6 +11,11 @@ h2 {
 
 time {
   color: #3c2c50;
+}
+
+p {
+  font-size: 1.2rem;
+  font-weight: normal;
 }
 
 .actions {
