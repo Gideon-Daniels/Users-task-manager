@@ -12,6 +12,11 @@ import { User } from '../../models/user.model';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input() user!: User;
+  showModal = false;
+  @Input() user?: User;
   @Input() tasks!: Task[];
+
+  onNewTask() {
+    this.showModal = !this.showModal;
+  }
 }

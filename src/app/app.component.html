@@ -4,7 +4,11 @@
     <app-user (selectedUser)="onUserTasks($event)"></app-user>
   </div>
   <div id="fallback">
-    <app-tasks [tasks]="userTasks" [user]="selectedUser"></app-tasks>
+    @if (!selectedUser) {
+      <p>Please select user</p>
+    } @else {
+      <app-tasks [tasks]="userTasks" [user]="selectedUser"></app-tasks>
+    }
   </div>
 </main>
 
