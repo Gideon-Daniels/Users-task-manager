@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { DUMMY_USERS } from '../../dummy-users';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { TasksComponent } from '../tasks/tasks.component';
 import { User } from '../../models/user.model';
@@ -12,10 +11,15 @@ import { User } from '../../models/user.model';
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  @Output() selectedUser = new EventEmitter();
-  users: User[] = DUMMY_USERS;
+  @Input({ required: true }) user!: User;
+  @Input({ required: true }) selected!: boolean;
+  @Output() select = new EventEmitter<string>();
 
-  onSelectedUser(user: User) {
-    this.selectedUser.emit(user);
+  get imagePath() {
+    return 'assets/users/' + this.user.avatar;
+  }
+
+  onSelectedUser() {
+    this.select.emit(this.user.id);
   }
 }

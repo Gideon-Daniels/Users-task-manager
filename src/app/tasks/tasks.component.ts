@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { Task } from '../../models/task.model';
-import { User } from '../../models/user.model';
+import { dummyTasks } from '../../dummy-tasks';
 
 @Component({
   selector: 'app-tasks',
@@ -12,11 +12,15 @@ import { User } from '../../models/user.model';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  showModal = false;
-  @Input() user?: User;
-  @Input() tasks!: Task[];
+  tasks: Task[] = dummyTasks;
+  @Input({ required: true }) userId!: string;
+  @Input({ required: true }) name!: string;
 
-  onNewTask() {
-    this.showModal = !this.showModal;
+  get selectedUserTasks() {
+    return this.tasks.filter((task) => task.userId === this.userId);
+  }
+
+  onCompleteTask(taskId: string) {
+    this.tasks = this.tasks.filter((task) => task.id !== taskId);
   }
 }

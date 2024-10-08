@@ -25,6 +25,7 @@ export class NewTaskComponent {
     newTask.id = dummyTasks.length + 1;
 
     dummyTasks.unshift(newTask);
+    // todo : fix bug when adding to task it does not dynamically update task lists
     this.onCloseModal();
   }
 }

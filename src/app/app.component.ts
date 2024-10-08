@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { UserComponent } from './user/user.component';
-import { dummyTasks } from '../dummy-tasks';
-import { User } from '../models/user.model';
+import { DUMMY_USERS } from '../dummy-users';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +12,14 @@ import { User } from '../models/user.model';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  userTasks: any;
-  selectedUser: any;
+  users = DUMMY_USERS;
+  selectedUserId?: string;
 
-  onUserTasks(user: User) {
-    this.userTasks = dummyTasks.filter((task) => task.userId === user.id);
-    this.selectedUser = user;
+  get selectedUser() {
+    return this.users.find((user) => user.id === this.selectedUserId);
+  }
+
+  onSelectUser(id: string) {
+    this.selectedUserId = id;
   }
 }
