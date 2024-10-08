@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
-import { Task } from '../../models/task.model';
-import { dummyTasks } from '../../dummy-tasks';
+import { TasksService } from './tasks.services';
 
 @Component({
   selector: 'app-tasks',
@@ -13,27 +12,24 @@ import { dummyTasks } from '../../dummy-tasks';
 })
 export class TasksComponent {
   isAddingTask = false;
-  tasks: Task[] = dummyTasks;
   @Input({ required: true }) userId!: string;
   @Input({ required: true }) name!: string;
 
+  constructor(private taskService: TasksService) {}
+
   get selectedUserTasks() {
-    return this.tasks.filter((task) => task.userId === this.userId);
+    return this.taskService.getUserTasks(this.userId);
   }
 
   onCompleteTask(taskId: string) {
-    this.tasks = this.tasks.filter((task) => task.id !== taskId);
+    this.taskService.removeTask(taskId);
   }
 
   onStartAddTask() {
     this.isAddingTask = true;
   }
 
-  onCancelAddTask() {
+  onCloseAddTask() {
     this.isAddingTask = false;
-  }
-
-  onAddTask(task: Task) {
-    this.tasks.unshift(task);
   }
 }
