@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
-import { User } from '../../../models/user.model';
-import { dummyTasks } from '../../../dummy-tasks';
+import { FormsModule } from '@angular/forms';
+import { Task } from '../../../models/task.model';
 
 @Component({
   selector: 'app-new-task',
@@ -11,21 +10,26 @@ import { dummyTasks } from '../../../dummy-tasks';
   styleUrl: './new-task.component.css',
 })
 export class NewTaskComponent {
-  @Output() closeModal = new EventEmitter();
-  @Input() user?: User;
+  title = '';
+  summary = '';
+  dueDate = '';
+  @Output() cancel = new EventEmitter<void>();
+  @Output() add = new EventEmitter<Task>();
+  @Input() userId!: string;
 
-  onCloseModal() {
-    this.closeModal.emit();
+  onCancel() {
+    this.cancel.emit();
   }
 
-  onSubmit(data: NgForm) {
-    const newTask = data.value;
-    console.log(this.user);
-    newTask.userId = this.user?.id;
-    newTask.id = dummyTasks.length + 1;
+  onSubmit() {
+    this.add.emit({
+      id: new Date().getMilliseconds().toString(),
+      title: this.title,
+      summary: this.summary,
+      dueDate: this.dueDate,
+      userId: this.userId,
+    });
 
-    dummyTasks.unshift(newTask);
-    // todo : fix bug when adding to task it does not dynamically update task lists
-    this.onCloseModal();
+    this.onCancel();
   }
 }
