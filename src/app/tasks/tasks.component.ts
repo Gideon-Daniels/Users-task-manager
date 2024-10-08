@@ -35,6 +35,5 @@ export class TasksComponent {
 
   onAddTask(task: Task) {
     this.tasks.unshift(task);
-    console.log(this.tasks);
   }
 }

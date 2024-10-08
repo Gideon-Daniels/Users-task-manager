@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { TasksComponent } from '../tasks/tasks.component';
 import { User } from '../../models/user.model';
+import { CardComponent } from '../shared/card/card.component';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [NgOptimizedImage, TasksComponent],
+  imports: [NgOptimizedImage, TasksComponent, CardComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })
